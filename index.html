@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DDTI Client Build Questionnaire</title>
+<link href="https://fonts.googleapis.com/css2?family=Saira:wght@300;400;500;600;700&family=Saira+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary:      #242834;
+    --primary-deep: #1a1e28;
+    --primary-mid:  #2e3444;
+    --primary-lite: #363d52;
+    --secondary:    #7d51fe;
+    --secondary-dim:#6340d4;
+    --accent:       #B6FF00;
+    --base:         #FFFFFF;
+    --text-mid:     #a8afc4;
+    --text-dim:     #5a6178;
+    --border:       #333848;
+    --error:        #ff5252;
+    --card-bg:      #2a3040;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--primary);
+    color: var(--base);
+    font-family: 'Saira', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(125,81,254,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(125,81,254,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+  header {
+    background: var(--primary-deep);
+    border-bottom: 1px solid var(--border);
+    padding: 1.5rem 3rem;
+    position: relative; z-index: 10;
+  }
+  header::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--secondary), var(--accent), transparent);
+  }
+  .header-inner {
+    max-width: 880px; margin: 0 auto;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 2rem;
+  }
+  .bbm-logo { display: flex; align-items: center; }
+  .bbm-logo img { height: 38px; width: auto; display: block; }
+  .header-badge { text-align: right; }
+  .badge-label { font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--secondary); font-weight: 600; margin-bottom: 0.15rem; }
+  .badge-title { font-family: 'Saira Condensed', sans-serif; font-size: 0.82rem; font-weight: 700; color: var(--text-mid); letter-spacing: 0.08em; text-transform: uppercase; }
+  .hero {
+    background: var(--primary-deep);
+    padding: 4rem 3rem 3.5rem;
+    position: relative; z-index: 1; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    top: -80px; right: -100px; width: 550px; height: 550px;
+    background: radial-gradient(circle, rgba(125,81,254,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+  .hero-inner { max-width: 880px; margin: 0 auto; position: relative; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(125,81,254,0.1); border: 1px solid rgba(125,81,254,0.3);
+    padding: 0.3rem 0.85rem; border-radius: 2px; margin-bottom: 1.5rem;
+  }
+  .hero-tag span { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--secondary); font-weight: 600; }
+  .hero-tag::before {
+    content: ''; display: block; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    animation: blink 2s infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .hero h1 {
+    font-family: 'Saira Condensed', sans-serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800; line-height: 1.0;
+    text-transform: uppercase; color: var(--base);
+    margin-bottom: 1.25rem; letter-spacing: 0.01em;
+  }
+  .hero h1 .hi-accent { color: var(--accent); }
+  .hero h1 .hi-purple { color: var(--secondary); }
+  .hero-desc { font-size: 0.92rem; color: var(--text-mid); line-height: 1.75; max-width: 560px; font-weight: 300; margin-bottom: 2rem; }
+  .progress-wrap { display: flex; align-items: center; gap: 1rem; max-width: 560px; }
+  .progress-track { flex: 1; height: 3px; background: var(--primary-lite); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--secondary), var(--accent)); width: 0%; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); border-radius: 3px; }
+  .progress-text { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); min-width: 52px; text-align: right; font-weight: 500; }
+  main { max-width: 880px; margin: 0 auto; padding: 3rem 3rem 6rem; position: relative; z-index: 1; }
+  .form-section { margin-bottom: 2.75rem; opacity: 0; transform: translateY(16px); animation: riseIn 0.45s ease forwards; }
+  @keyframes riseIn { to { opacity:1; transform:translateY(0); } }
+  .form-section:nth-child(1){animation-delay:0.08s}
+  .form-section:nth-child(2){animation-delay:0.14s}
+  .form-section:nth-child(3){animation-delay:0.20s}
+  .form-section:nth-child(4){animation-delay:0.26s}
+  .form-section:nth-child(5){animation-delay:0.32s}
+  .form-section:nth-child(6){animation-delay:0.38s}
+  .form-section:nth-child(7){animation-delay:0.44s}
+  .form-section:nth-child(8){animation-delay:0.50s}
+  .section-head { display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 1.5rem; background: var(--card-bg); border: 1px solid var(--border); border-left: 3px solid var(--secondary); border-radius: 3px; margin-bottom: 1.5rem; }
+  .section-num { font-family: 'Saira Condensed', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--secondary); line-height: 1; opacity: 0.55; min-width: 2.2rem; padding-top: 2px; }
+  .section-title { font-family: 'Saira Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--base); margin-bottom: 0.25rem; }
+  .section-desc { font-size: 0.75rem; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+  .field { margin-bottom: 1.1rem; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  label { display: block; font-size: 0.63rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.42rem; }
+  label .req { color: var(--accent); margin-left: 2px; }
+  label .hint { font-weight: 300; letter-spacing: 0.04em; text-transform: none; color: var(--text-dim); font-size: 0.62rem; margin-left: 0.4rem; }
+  input[type="text"], input[type="email"], input[type="tel"], textarea, select {
+    width: 100%; background: var(--card-bg); border: 1px solid var(--border);
+    color: var(--base); font-family: 'Saira', sans-serif;
+    font-size: 0.875rem; font-weight: 400; padding: 0.78rem 1rem;
+    outline: none; border-radius: 3px;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    appearance: none; -webkit-appearance: none;
+  }
+  input::placeholder, textarea::placeholder { color: var(--text-dim); font-weight: 300; }
+  input:focus, textarea:focus, select:focus { border-color: var(--secondary); background: var(--primary-mid); box-shadow: 0 0 0 3px rgba(125,81,254,0.1); }
+  textarea { resize: vertical; min-height: 108px; line-height: 1.65; }
+  .select-wrap { position: relative; }
+  .select-wrap::after { content: '▾'; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--secondary); font-size: 0.75rem; pointer-events: none; }
+  select option { background: var(--primary-mid); color: var(--base); }
+  .service-table { width: 100%; border-collapse: collapse; border: 1px solid var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 0.65rem; }
+  .service-table th { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 700; padding: 0.6rem 0.85rem; text-align: left; border-bottom: 1px solid var(--border); background: var(--primary-mid); }
+  .service-table td { padding: 0; border-bottom: 1px solid var(--border); }
+  .service-table tr:last-child td { border-bottom: none; }
+  .service-table td input { border: none; background: transparent; padding: 0.62rem 0.85rem; font-size: 0.82rem; border-radius: 0; }
+  .service-table td input:focus { background: var(--primary-mid); box-shadow: inset 0 0 0 1px rgba(125,81,254,0.25); border: none; }
+  .service-table tr:hover td { background: rgba(125,81,254,0.04); }
+  .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 3px; padding: 1.1rem 1.25rem; margin-bottom: 0.65rem; position: relative; transition: border-color 0.2s; }
+  .faq-item:focus-within { border-color: rgba(125,81,254,0.35); }
+  .faq-item input { margin-bottom: 0.55rem; font-size: 0.85rem; font-weight: 500; }
+  .faq-item textarea { min-height: 70px; font-size: 0.82rem; }
+  .faq-label { font-size: 0.57rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.32rem; display: block; font-weight: 600; }
+  .remove-btn { position: absolute; top: 0.82rem; right: 0.82rem; background: none; border: 1px solid var(--border); color: var(--text-dim); cursor: pointer; font-size: 0.88rem; line-height: 1; padding: 0.2rem 0.42rem; border-radius: 2px; transition: all 0.15s; }
+  .remove-btn:hover { color: var(--error); border-color: var(--error); background: rgba(255,82,82,0.07); }
+  .add-btn { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: var(--secondary); background: none; border: 1px solid rgba(125,81,254,0.3); padding: 0.5rem 1rem; cursor: pointer; font-family: 'Saira', sans-serif; border-radius: 3px; transition: all 0.18s; margin-top: 0.45rem; }
+  .add-btn:hover { border-color: var(--secondary); background: rgba(125,81,254,0.08); color: var(--base); }
+  .check-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(205px, 1fr)); gap: 0.45rem; }
+  .check-item { display: flex; align-items: center; gap: 0.6rem; cursor: pointer; padding: 0.6rem 0.85rem; border: 1px solid var(--border); background: var(--card-bg); border-radius: 3px; transition: all 0.15s; font-size: 0.78rem; color: var(--text-mid); user-select: none; }
+  .check-item:hover { border-color: rgba(125,81,254,0.35); color: var(--base); }
+  .check-item input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--secondary); cursor: pointer; flex-shrink: 0; padding: 0; min-width: unset; }
+  .check-item:has(input:checked) { border-color: var(--secondary); background: rgba(125,81,254,0.1); color: var(--base); }
+  .tone-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(172px, 1fr)); gap: 0.6rem; }
+  .tone-card { border: 1px solid var(--border); background: var(--card-bg); padding: 1.1rem; cursor: pointer; transition: all 0.18s; position: relative; border-radius: 3px; user-select: none; }
+  .tone-card input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+  .tone-card:hover { border-color: rgba(125,81,254,0.4); }
+  .tone-card:has(input:checked) { border-color: var(--accent); background: rgba(182,255,0,0.06); }
+  .tone-card:has(input:checked)::after { content: '✓'; position: absolute; top: 0.6rem; right: 0.7rem; color: var(--accent); font-size: 0.8rem; font-weight: 700; }
+  .tone-name { font-size: 0.8rem; font-weight: 600; color: var(--base); margin-bottom: 0.3rem; }
+  .tone-example { font-size: 0.65rem; color: var(--text-dim); font-style: italic; line-height: 1.5; }
+  .avail-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0.45rem; }
+  .avail-slot { border: 1px solid var(--border); background: var(--card-bg); padding: 0.85rem 0.35rem; text-align: center; cursor: pointer; transition: all 0.15s; position: relative; border-radius: 3px; user-select: none; }
+  .avail-slot input { position: absolute; opacity: 0; }
+  .slot-day { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.2rem; }
+  .slot-hours { font-size: 0.58rem; color: var(--text-dim); line-height: 1.4; }
+  .avail-slot:has(input:checked) { border-color: var(--accent); background: rgba(182,255,0,0.07); }
+  .avail-slot:has(input:checked) .slot-day { color: var(--accent); }
+  .avail-slot:has(input:checked) .slot-hours { color: var(--text-mid); }
+  .submit-section { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); position: relative; }
+  .submit-section::before { content: ''; position: absolute; top: -1px; left: 0; width: 120px; height: 2px; background: linear-gradient(90deg, var(--secondary), var(--accent)); }
+  .submit-note { font-size: 0.78rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1.75rem; max-width: 520px; font-weight: 300; }
+  .submit-note strong { color: var(--base); font-weight: 600; }
+  .submit-btn { display: inline-flex; align-items: center; gap: 1rem; background: var(--secondary); color: var(--base); border: none; padding: 1rem 2.5rem; font-family: 'Saira Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; border-radius: 3px; transition: all 0.2s; }
+  .submit-btn:hover { background: var(--secondary-dim); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(125,81,254,0.3); }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+  .btn-arrow { font-size: 1rem; transition: transform 0.2s; }
+  .submit-btn:hover .btn-arrow { transform: translateX(4px); }
+  .success-screen { display: none; text-align: center; padding: 6rem 2rem; }
+  .success-screen.visible { display: block; }
+  .success-ring { width: 72px; height: 72px; border: 2px solid var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 1.6rem; color: var(--accent); animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 0 40px rgba(182,255,0,0.2); }
+  @keyframes popIn { from{transform:scale(0.3);opacity:0} to{transform:scale(1);opacity:1} }
+  .success-screen h2 { font-family: 'Saira Condensed', sans-serif; font-size: 2.2rem; font-weight: 800; text-transform: uppercase; color: var(--base); margin-bottom: 1rem; }
+  .success-screen p { color: var(--text-mid); font-size: 0.9rem; line-height: 1.75; font-weight: 300; max-width: 420px; margin: 0 auto; }
+  footer { background: var(--primary-deep); border-top: 1px solid var(--border); padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.62rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; position: relative; z-index: 1; }
+  footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--secondary), transparent); opacity: 0.4; }
+  footer a { color: var(--accent); text-decoration: none; opacity: 0.75; transition: opacity 0.2s; }
+  footer a:hover { opacity: 1; }
+  .error-banner { display: none; background: rgba(255,82,82,0.1); border: 1px solid var(--error); color: var(--error); padding: 0.85rem 1.25rem; border-radius: 3px; font-size: 0.78rem; margin-bottom: 1.5rem; }
+  .error-banner.visible { display: block; }
+  @media (max-width: 680px) {
+    header, footer { padding: 1.25rem; }
+    .hero { padding: 2.5rem 1.25rem; }
+    main { padding: 2rem 1.25rem 5rem; }
+    .field-row { grid-template-columns: 1fr; }
+    .avail-grid { grid-template-columns: repeat(4,1fr); }
+    .check-grid { grid-template-columns: 1fr; }
+    .tone-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="bbm-logo">
+      <img src="logo.png" alt="BlackBoxMedia" style="height:38px; width:auto; display:block;">
+    </div>
+    <div class="header-badge">
+      <div class="badge-label">Client Onboarding</div>
+      <div class="badge-title">AI System Setup</div>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag"><span>DDT Installations</span></div>
+    <h1>AI Booking System<br><span class="hi-purple">Setup</span> <span class="hi-accent">Questionnaire</span></h1>
+    <p class="hero-desc">Your answers here directly configure the AI that will handle every client inquiry, email, and SMS on your behalf. The more detail you provide, the better it performs from day one.</p>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressLabel">0 / 8</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- REPLACE mrerawda below after Step 3 of the setup guide -->
+  <form id="mainForm" action="https://formspree.io/f/mrerawda" method="POST">
+    <div class="error-banner" id="errorBanner">Something went wrong. Please try again or contact your project manager.</div>
+
+    <!-- 01 -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">01</div><div><div class="section-title">Business Identity</div><div class="section-desc">How the AI introduces itself and signs off in every communication.</div></div></div>
+      <div class="field-row">
+        <div class="field"><label>Business Name <span class="req">*</span></label><input type="text" name="bizName" placeholder="DDT Installations" required></div>
+        <div class="field"><label>AI Signature Name <span class="req">*</span><span class="hint">First name on emails</span></label><input type="text" name="aiName" placeholder="e.g. Mike" required></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Owner Full Name <span class="req">*</span></label><input type="text" name="ownerName" placeholder="Your full name" required></div>
+        <div class="field"><label>Owner Email <span class="req">*</span></label><input type="email" name="ownerEmail" placeholder="your@email.com" required></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Owner Cell <span class="req">*</span><span class="hint">System alerts go here</span></label><input type="tel" name="ownerPhone" placeholder="+1 (780) 555-0100" required></div>
+        <div class="field"><label>Twilio / Business Number</label><input type="tel" name="bizPhone" placeholder="+1 (780) 555-0200"></div>
+      </div>
+      <div class="field"><label>Full Shop Address <span class="req">*</span><span class="hint">Goes into every confirmation and calendar event</span></label><input type="text" name="bizAddress" placeholder="Your full shop address" required></div>
+    </div>
+
+    <!-- 02 -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">02</div><div><div class="section-title">Services & Pricing</div><div class="section-desc">The AI quotes these ranges honestly when prospects ask.</div></div></div>
+      <table class="service-table">
+        <thead><tr><th style="width:34%">Service</th><th style="width:24%">Price Range</th><th style="width:18%">Install Time</th><th style="width:24%">Notes</th></tr></thead>
+        <tbody id="serviceBody">
+          <tr><td><input type="text" name="service_1_name" placeholder="Remote Start (Basic)"></td><td><input type="text" name="service_1_price" placeholder="$250–$350"></td><td><input type="text" name="service_1_time" placeholder="2 hrs"></td><td><input type="text" name="service_1_notes" placeholder="1-way, standard vehicles"></td></tr>
+          <tr><td><input type="text" name="service_2_name" placeholder="Remote Start (Premium)"></td><td><input type="text" name="service_2_price" placeholder="$350–$500"></td><td><input type="text" name="service_2_time" placeholder="3 hrs"></td><td><input type="text" name="service_2_notes" placeholder="2-way / app control"></td></tr>
+          <tr><td><input type="text" name="service_3_name" placeholder="Car Audio (Head Unit)"></td><td><input type="text" name="service_3_price" placeholder="$200–$400"></td><td><input type="text" name="service_3_time" placeholder="2 hrs"></td><td><input type="text" name="service_3_notes" placeholder=""></td></tr>
+          <tr><td><input type="text" name="service_4_name" placeholder="Security System"></td><td><input type="text" name="service_4_price" placeholder="$300–$600"></td><td><input type="text" name="service_4_time" placeholder="3 hrs"></td><td><input type="text" name="service_4_notes" placeholder=""></td></tr>
+          <tr><td><input type="text" name="service_5_name" placeholder="Backup Camera"></td><td><input type="text" name="service_5_price" placeholder="$150–$350"></td><td><input type="text" name="service_5_time" placeholder="1.5 hrs"></td><td><input type="text" name="service_5_notes" placeholder=""></td></tr>
+        </tbody>
+      </table>
+      <button type="button" class="add-btn" id="addServiceRow">+ Add Service</button>
+    </div>
+
+    <!-- 03 -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">03</div><div><div class="section-title">Common Client Questions</div><div class="section-desc">The questions you get asked most. The AI uses your exact answers.</div></div></div>
+      <div id="faqList">
+        <div class="faq-item">
+          <button type="button" class="remove-btn" onclick="removeFaq(this)">×</button>
+          <span class="faq-label">Question</span>
+          <input type="text" name="faq_1_q" placeholder="e.g. Do you work on diesel trucks?">
+          <span class="faq-label" style="margin-top:0.5rem;">Your Answer</span>
+          <textarea name="faq_1_a" placeholder="e.g. Yes, we work on most diesel trucks."></textarea>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="remove-btn" onclick="removeFaq(this)">×</button>
+          <span class="faq-label">Question</span>
+          <input type="text" name="faq_2_q" placeholder="e.g. How long does a remote start install take?">
+          <span class="faq-label" style="margin-top:0.5rem;">Your Answer</span>
+          <textarea name="faq_2_a" placeholder="e.g. Most remote starts take 2–3 hours."></textarea>
+        </div>
+      </div>
+      <button type="button" class="add-btn" id="addFaq">+ Add Question</button>
+    </div>
+
+    <!-- 04 -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">04</div><div><div class="section-title">Jobs & Vehicles You Decline</div><div class="section-desc">Critical — the AI needs to know when and how to politely say no.</div></div></div>
+      <div class="field">
+        <label>Vehicle types you won't work on</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox" name="decline_vehicles" value="Exotic / Supercar"> Exotic / Supercar</label>
+          <label class="check-item"><input type="checkbox" name="decline_vehicles" value="Semi / Transport Truck"> Semi / Transport Truck</label>
+          <label class="check-item"><input type="checkbox" name="decline_vehicles" value="Marine / Boats"> Marine / Boats</label>
+          <label class="check-item"><input type="checkbox" name="decline_vehicles" value="RV / Motorhome"> RV / Motorhome</label>
+          <label class="check-item"><input type="checkbox" name="decline_vehicles" value="Salvage / Written-off"> Salvage / Written-off</label>
+          <label class="check-item"><input type="checkbox" name="decline_vehicles" value="Pre-1995 Vehicles"> Pre-1995 Vehicles</label>
+        </div>
+      </div>
+      <div class="field" style="margin-top:0.85rem;">
+        <label>Job types you decline</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox" name="decline_jobs" value="Fleet / Commercial"> Fleet / Commercial</label>
+          <label class="check-item"><input type="checkbox" name="decline_jobs" value="Insurance Claim Work"> Insurance Claim Work</label>
+          <label class="check-item"><input type="checkbox" name="decline_jobs" value="Dealer Warranty Work"> Dealer Warranty Work</label>
+          <label class="check-item"><input type="checkbox" name="decline_jobs" value="Custom Fabrication"> Custom Fabrication</label>
+          <label class="check-item"><input type="checkbox" name="decline_jobs" value="Same-day Bookings"> Same-day Bookings</label>
+          <label class="check-item"><input type="checkbox" name="decline_jobs" value="Mobile / On-site Installs"> Mobile / On-site Installs</label>
+        </div>
+      </div>
+      <div class="field" style="margin-top:0.85rem;">
+        <label>Anything else to decline or escalate</label>
+        <textarea name="declineOther" placeholder="e.g. Vehicles with pre-existing electrical issues."></textarea>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">05</div><div><div class="section-title">Tone & Voice</div><div class="section-desc">Pick the style that feels most like you.</div></div></div>
+      <div class="field">
+        <label>Primary tone <span class="req">*</span></label>
+        <div class="tone-grid">
+          <label class="tone-card"><input type="radio" name="tone" value="Friendly & Casual"><div class="tone-name">Friendly & Casual</div><div class="tone-example">"Hey! Yeah we can definitely do that — what's your vehicle?"</div></label>
+          <label class="tone-card"><input type="radio" name="tone" value="Professional & Direct"><div class="tone-name">Professional & Direct</div><div class="tone-example">"Thanks for reaching out. Here's what we can do for your F-150."</div></label>
+          <label class="tone-card"><input type="radio" name="tone" value="Expert & Technical"><div class="tone-name">Expert & Technical</div><div class="tone-example">"For your year/model, you'll want a bypass module — here's why."</div></label>
+          <label class="tone-card"><input type="radio" name="tone" value="Warm & Approachable"><div class="tone-name">Warm & Approachable</div><div class="tone-example">"Great question — let me walk you through your options."</div></label>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:1.1rem;">
+        <div class="field"><label>Phrases you always use</label><textarea name="phrasesAlways" placeholder='"no worries", "for sure"' style="min-height:82px;"></textarea></div>
+        <div class="field"><label>Phrases you'd never use</label><textarea name="phrasesNever" placeholder='"Certainly!", "Absolutely!"' style="min-height:82px;"></textarea></div>
+      </div>
+      <div class="field"><label>Anything else about how you communicate</label><textarea name="toneNotes" placeholder="e.g. I always use the client's first name."></textarea></div>
+    </div>
+
+    <!-- 06 -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">06</div><div><div class="section-title">Booking Preferences</div><div class="section-desc">Rules the AI follows when confirming appointments.</div></div></div>
+      <div class="field">
+        <label>Drop-off policy <span class="req">*</span></label>
+        <div class="select-wrap"><select name="dropoffPolicy" required><option value="">Select…</option><option>Drop-off only — clients leave the vehicle with us</option><option>Waiting available for installs under 1 hour only</option><option>Either — client can wait or drop off</option></select></div>
+      </div>
+      <div class="field">
+        <label>What must clients bring?</label>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox" name="clientBring" value="Both sets of keys" checked> Both sets of keys</label>
+          <label class="check-item"><input type="checkbox" name="clientBring" value="Vehicle ownership"> Vehicle ownership</label>
+          <label class="check-item"><input type="checkbox" name="clientBring" value="Insurance documents"> Insurance documents</label>
+          <label class="check-item"><input type="checkbox" name="clientBring" value="Key fob / spare remote"> Key fob / spare remote</label>
+          <label class="check-item"><input type="checkbox" name="clientBring" value="Vehicle manual"> Vehicle manual</label>
+          <label class="check-item"><input type="checkbox" name="clientBring" value="Nothing extra needed"> Nothing extra needed</label>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:0.85rem;">
+        <div class="field"><label>Minimum notice to book <span class="req">*</span></label><div class="select-wrap"><select name="minNotice" required><option value="">Select…</option><option>Same day OK</option><option>24 hours minimum</option><option>48 hours minimum</option><option>72 hours minimum</option></select></div></div>
+        <div class="field"><label>How far out do you schedule?</label><div class="select-wrap"><select name="scheduleWindow"><option value="">Select…</option><option>1 week rolling</option><option>2 weeks rolling</option><option>1 month rolling</option><option>I'll manage manually</option></select></div></div>
+      </div>
+      <div class="field"><label>Anything clients must know before booking</label><textarea name="bookingNotes" placeholder="e.g. All installs are drop-off only."></textarea></div>
+    </div>
+
+    <!-- 07 -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">07</div><div><div class="section-title">Schedule & Capacity</div><div class="section-desc">Pre-filled with your confirmed hours. Adjust anything that differs.</div></div></div>
+      <div class="field">
+        <label>Operating days <span class="req">*</span></label>
+        <div class="avail-grid">
+          <label class="avail-slot"><input type="checkbox" name="operatingDays" value="Sunday" checked><div class="slot-day">Sun</div><div class="slot-hours">7am–7pm</div></label>
+          <label class="avail-slot"><input type="checkbox" name="operatingDays" value="Monday" checked><div class="slot-day">Mon</div><div class="slot-hours">7am–7pm</div></label>
+          <label class="avail-slot"><input type="checkbox" name="operatingDays" value="Tuesday" checked><div class="slot-day">Tue</div><div class="slot-hours">7am–7pm</div></label>
+          <label class="avail-slot"><input type="checkbox" name="operatingDays" value="Wednesday" checked><div class="slot-day">Wed</div><div class="slot-hours">7am–7pm</div></label>
+          <label class="avail-slot"><input type="checkbox" name="operatingDays" value="Thursday" checked><div class="slot-day">Thu</div><div class="slot-hours">7am–7pm</div></label>
+          <label class="avail-slot"><input type="checkbox" name="operatingDays" value="Friday" checked><div class="slot-day">Fri</div><div class="slot-hours">7am–7pm</div></label>
+          <label class="avail-slot"><input type="checkbox" name="operatingDays" value="Saturday"><div class="slot-day">Sat</div><div class="slot-hours">Closed</div></label>
+        </div>
+      </div>
+      <div class="field-row" style="margin-top:1.1rem;">
+        <div class="field"><label>Max jobs per day</label><input type="text" name="maxJobs" value="15" placeholder="15"></div>
+        <div class="field"><label>Buffer between jobs (mins)</label><input type="text" name="bufferMins" value="15" placeholder="15"></div>
+      </div>
+      <div class="field"><label>Known upcoming closures</label><textarea name="closures" placeholder="e.g. Dec 23–Jan 2 (holiday)." style="min-height:80px;"></textarea></div>
+    </div>
+
+    <!-- 08 -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">08</div><div><div class="section-title">Technical Setup</div><div class="section-desc">Account and credential status needed before development begins.</div></div></div>
+      <div class="field-row">
+        <div class="field"><label>Twilio Account Status</label><div class="select-wrap"><select name="twilioStatus"><option value="">Select…</option><option>Account created — number purchased</option><option>Account created — no number yet</option><option>Not set up yet</option></select></div></div>
+        <div class="field"><label>Twilio Number (if purchased)</label><input type="tel" name="twilioNumber" placeholder="+1 (780) 555-0300"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Google Workspace email for the system</label><input type="email" name="workspaceEmail" placeholder="system@yourbusiness.com"></div>
+        <div class="field"><label>Website platform</label><div class="select-wrap"><select name="websitePlatform"><option value="">Select…</option><option>WordPress</option><option>Squarespace</option><option>Wix</option><option>Webflow</option><option>Custom / HTML</option><option>Other</option></select></div></div>
+      </div>
+      <div class="field"><label>Anything else we should know before building</label><textarea name="additionalNotes" placeholder="Existing systems, integrations, preferences, or constraints."></textarea></div>
+    </div>
+
+    <div class="submit-section">
+      <p class="submit-note">Your responses configure the AI directly. <strong>There are no wrong answers</strong> — the more specific you are, the better the system performs from day one.</p>
+      <button type="submit" class="submit-btn" id="submitBtn">Submit Questionnaire <span class="btn-arrow">→</span></button>
+    </div>
+  </form>
+
+  <div class="success-screen" id="successScreen">
+    <div class="success-ring">✓</div>
+    <h2>Received — Thank You</h2>
+    <p>We'll review your answers and reach out within one business day to confirm everything and walk through next steps.</p>
+  </div>
+</main>
+
+<footer>
+  <span>© 2025 BlackBoxMedia — Design. Development. Marketing.</span>
+  <a href="https://blackboxmedia.ca" target="_blank">blackboxmedia.ca</a>
+</footer>
+
+<script>
+  function updateProgress() {
+    var sections = document.querySelectorAll('.form-section');
+    var filled = 0;
+    sections.forEach(function(s) {
+      var inputs = s.querySelectorAll('input:not([type="checkbox"]):not([type="radio"]), textarea, select');
+      var checks = s.querySelectorAll('input[type="checkbox"]:checked, input[type="radio"]:checked');
+      var has = checks.length > 0;
+      inputs.forEach(function(i) { if (i.value.trim()) has = true; });
+      if (has) filled++;
+    });
+    var pct = Math.round((filled / sections.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = filled + ' / ' + sections.length;
+  }
+  document.querySelectorAll('input, textarea, select').forEach(function(el) {
+    el.addEventListener('input', updateProgress);
+    el.addEventListener('change', updateProgress);
+  });
+  updateProgress();
+
+  var faqCount = 3;
+  document.getElementById('addServiceRow').addEventListener('click', function() {
+    var count = document.querySelectorAll('#serviceBody tr').length + 1;
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td><input type="text" name="service_'+count+'_name" placeholder="Service name"></td><td><input type="text" name="service_'+count+'_price" placeholder="$000–$000"></td><td><input type="text" name="service_'+count+'_time" placeholder="X hrs"></td><td><input type="text" name="service_'+count+'_notes" placeholder="Notes"></td>';
+    document.getElementById('serviceBody').appendChild(tr);
+    tr.querySelector('input').focus();
+    tr.querySelectorAll('input').forEach(function(el) { el.addEventListener('input', updateProgress); });
+  });
+
+  document.getElementById('addFaq').addEventListener('click', function() {
+    var div = document.createElement('div');
+    div.className = 'faq-item';
+    div.style.cssText = 'opacity:0;transform:translateY(8px);transition:opacity 0.3s,transform 0.3s';
+    div.innerHTML = '<button type="button" class="remove-btn" onclick="removeFaq(this)">×</button><span class="faq-label">Question</span><input type="text" name="faq_'+faqCount+'_q" placeholder="Client question…"><span class="faq-label" style="margin-top:0.5rem;">Your Answer</span><textarea name="faq_'+faqCount+'_a" placeholder="Your answer…"></textarea>';
+    faqCount++;
+    document.getElementById('faqList').appendChild(div);
+    div.querySelector('input').focus();
+    div.querySelectorAll('input, textarea').forEach(function(el) { el.addEventListener('input', updateProgress); });
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; });
+    });
+  });
+
+  function removeFaq(btn) {
+    var item = btn.closest('.faq-item');
+    item.style.cssText = 'opacity:0;transition:opacity 0.2s';
+    setTimeout(function() { item.remove(); updateProgress(); }, 200);
+  }
+
+  // Handle Formspree submission with success screen
+  document.getElementById('mainForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var btn = document.getElementById('submitBtn');
+    btn.innerHTML = 'Submitting… <span class="btn-arrow">↻</span>';
+    btn.disabled = true;
+
+    var formData = new FormData(this);
+    fetch(this.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(response) {
+      if (response.ok) {
+        document.getElementById('mainForm').style.display = 'none';
+        document.getElementById('successScreen').classList.add('visible');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        document.getElementById('errorBanner').classList.add('visible');
+        btn.innerHTML = 'Submit Questionnaire <span class="btn-arrow">→</span>';
+        btn.disabled = false;
+      }
+    })
+    .catch(function() {
+      document.getElementById('errorBanner').classList.add('visible');
+      btn.innerHTML = 'Submit Questionnaire <span class="btn-arrow">→</span>';
+      btn.disabled = false;
+    });
+  });
+</script>
+</body>
+</html>
