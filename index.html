@@ -99,28 +99,34 @@
   }
   .hero h1 .hi-accent { color: var(--accent); }
   .hero h1 .hi-purple { color: var(--secondary); }
-  .hero-desc { font-size: 0.92rem; color: var(--text-mid); line-height: 1.75; max-width: 560px; font-weight: 300; margin-bottom: 2rem; }
-  .progress-wrap { display: flex; align-items: center; gap: 1rem; max-width: 560px; }
+  .hero-desc { font-size: 0.92rem; color: var(--text-mid); line-height: 1.75; max-width: 580px; font-weight: 300; margin-bottom: 1.5rem; }
+  .time-estimate { font-size: 0.72rem; color: var(--accent); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 2rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+  .time-estimate::before { content: '⏱'; font-size: 0.85rem; }
+  .progress-wrap { display: flex; align-items: center; gap: 1rem; max-width: 580px; }
   .progress-track { flex: 1; height: 3px; background: var(--primary-lite); border-radius: 3px; overflow: hidden; }
   .progress-fill { height: 100%; background: linear-gradient(90deg, var(--secondary), var(--accent)); width: 0%; transition: width 0.5s cubic-bezier(0.4,0,0.2,1); border-radius: 3px; }
-  .progress-text { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); min-width: 52px; text-align: right; font-weight: 500; }
+  .progress-text { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-dim); min-width: 62px; text-align: right; font-weight: 500; }
   main { max-width: 880px; margin: 0 auto; padding: 3rem 3rem 6rem; position: relative; z-index: 1; }
   .form-section { margin-bottom: 2.75rem; opacity: 0; transform: translateY(16px); animation: riseIn 0.45s ease forwards; }
   @keyframes riseIn { to { opacity:1; transform:translateY(0); } }
-  .form-section:nth-child(1){animation-delay:0.08s}
-  .form-section:nth-child(2){animation-delay:0.14s}
-  .form-section:nth-child(3){animation-delay:0.20s}
-  .form-section:nth-child(4){animation-delay:0.26s}
-  .form-section:nth-child(5){animation-delay:0.32s}
-  .form-section:nth-child(6){animation-delay:0.38s}
-  .form-section:nth-child(7){animation-delay:0.44s}
-  .form-section:nth-child(8){animation-delay:0.50s}
+  .form-section:nth-child(1){animation-delay:0.04s}
+  .form-section:nth-child(2){animation-delay:0.08s}
+  .form-section:nth-child(3){animation-delay:0.12s}
+  .form-section:nth-child(4){animation-delay:0.16s}
+  .form-section:nth-child(5){animation-delay:0.20s}
+  .form-section:nth-child(6){animation-delay:0.24s}
+  .form-section:nth-child(7){animation-delay:0.28s}
+  .form-section:nth-child(8){animation-delay:0.32s}
   .section-head { display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 1.5rem; background: var(--card-bg); border: 1px solid var(--border); border-left: 3px solid var(--secondary); border-radius: 3px; margin-bottom: 1.5rem; }
-  .section-num { font-family: 'Saira Condensed', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--secondary); line-height: 1; opacity: 0.55; min-width: 2.2rem; padding-top: 2px; }
-  .section-title { font-family: 'Saira Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--base); margin-bottom: 0.25rem; }
+  .section-head.priority { border-left-color: var(--accent); }
+  .section-head.priority .section-num { color: var(--accent); }
+  .section-num { font-family: 'Saira Condensed', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--secondary); line-height: 1; opacity: 0.55; min-width: 2.6rem; padding-top: 2px; }
+  .section-title { font-family: 'Saira Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--base); margin-bottom: 0.3rem; }
+  .priority-tag { display: inline-block; background: rgba(182,255,0,0.12); color: var(--accent); font-size: 0.55rem; font-weight: 700; letter-spacing: 0.18em; padding: 0.2rem 0.55rem; border-radius: 2px; margin-left: 0.5rem; vertical-align: middle; text-transform: uppercase; }
   .section-desc { font-size: 0.75rem; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
   .field { margin-bottom: 1.1rem; }
   .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
   label { display: block; font-size: 0.63rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mid); margin-bottom: 0.42rem; }
   label .req { color: var(--accent); margin-left: 2px; }
   label .hint { font-weight: 300; letter-spacing: 0.04em; text-transform: none; color: var(--text-dim); font-size: 0.62rem; margin-left: 0.4rem; }
@@ -145,10 +151,11 @@
   .service-table td input { border: none; background: transparent; padding: 0.62rem 0.85rem; font-size: 0.82rem; border-radius: 0; }
   .service-table td input:focus { background: var(--primary-mid); box-shadow: inset 0 0 0 1px rgba(125,81,254,0.25); border: none; }
   .service-table tr:hover td { background: rgba(125,81,254,0.04); }
-  .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 3px; padding: 1.1rem 1.25rem; margin-bottom: 0.65rem; position: relative; transition: border-color 0.2s; }
-  .faq-item:focus-within { border-color: rgba(125,81,254,0.35); }
-  .faq-item input { margin-bottom: 0.55rem; font-size: 0.85rem; font-weight: 500; }
-  .faq-item textarea { min-height: 70px; font-size: 0.82rem; }
+  .faq-item, .convo-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 3px; padding: 1.1rem 1.25rem; margin-bottom: 0.65rem; position: relative; transition: border-color 0.2s; }
+  .faq-item:focus-within, .convo-item:focus-within { border-color: rgba(125,81,254,0.35); }
+  .faq-item input, .convo-item input { margin-bottom: 0.55rem; font-size: 0.85rem; font-weight: 500; }
+  .faq-item textarea, .convo-item textarea { min-height: 70px; font-size: 0.82rem; }
+  .convo-item textarea { min-height: 110px; font-family: 'Courier New', monospace; font-size: 0.78rem; line-height: 1.6; }
   .faq-label { font-size: 0.57rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.32rem; display: block; font-weight: 600; }
   .remove-btn { position: absolute; top: 0.82rem; right: 0.82rem; background: none; border: 1px solid var(--border); color: var(--text-dim); cursor: pointer; font-size: 0.88rem; line-height: 1; padding: 0.2rem 0.42rem; border-radius: 2px; transition: all 0.15s; }
   .remove-btn:hover { color: var(--error); border-color: var(--error); background: rgba(255,82,82,0.07); }
@@ -175,9 +182,11 @@
   .avail-slot:has(input:checked) { border-color: var(--accent); background: rgba(182,255,0,0.07); }
   .avail-slot:has(input:checked) .slot-day { color: var(--accent); }
   .avail-slot:has(input:checked) .slot-hours { color: var(--text-mid); }
+  .help-callout { background: rgba(125,81,254,0.06); border: 1px solid rgba(125,81,254,0.2); border-left: 3px solid var(--secondary); border-radius: 3px; padding: 0.85rem 1.1rem; margin-bottom: 1rem; font-size: 0.74rem; color: var(--text-mid); line-height: 1.6; }
+  .help-callout strong { color: var(--accent); font-weight: 600; }
   .submit-section { margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); position: relative; }
   .submit-section::before { content: ''; position: absolute; top: -1px; left: 0; width: 120px; height: 2px; background: linear-gradient(90deg, var(--secondary), var(--accent)); }
-  .submit-note { font-size: 0.78rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1.75rem; max-width: 520px; font-weight: 300; }
+  .submit-note { font-size: 0.78rem; color: var(--text-mid); line-height: 1.75; margin-bottom: 1.75rem; max-width: 540px; font-weight: 300; }
   .submit-note strong { color: var(--base); font-weight: 600; }
   .submit-btn { display: inline-flex; align-items: center; gap: 1rem; background: var(--secondary); color: var(--base); border: none; padding: 1rem 2.5rem; font-family: 'Saira Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; border-radius: 3px; transition: all 0.2s; }
   .submit-btn:hover { background: var(--secondary-dim); transform: translateY(-2px); box-shadow: 0 10px 32px rgba(125,81,254,0.3); }
@@ -201,7 +210,7 @@
     header, footer { padding: 1.25rem; }
     .hero { padding: 2.5rem 1.25rem; }
     main { padding: 2rem 1.25rem 5rem; }
-    .field-row { grid-template-columns: 1fr; }
+    .field-row, .field-row-3 { grid-template-columns: 1fr; }
     .avail-grid { grid-template-columns: repeat(4,1fr); }
     .check-grid { grid-template-columns: 1fr; }
     .tone-grid { grid-template-columns: 1fr 1fr; }
@@ -213,7 +222,7 @@
 <header>
   <div class="header-inner">
     <div class="bbm-logo">
-      <img src="logo.png" alt="BlackBoxMedia" style="height:38px; width:auto; display:block;">
+      <img src="logo.png" alt="BlackBoxMedia">
     </div>
     <div class="header-badge">
       <div class="badge-label">Client Onboarding</div>
@@ -226,20 +235,20 @@
   <div class="hero-inner">
     <div class="hero-tag"><span>DDT Installations</span></div>
     <h1>AI Booking System<br><span class="hi-purple">Setup</span> <span class="hi-accent">Questionnaire</span></h1>
-    <p class="hero-desc">Your answers here directly configure the AI that will handle every client inquiry, email, and SMS on your behalf. The more detail you provide, the better it performs from day one.</p>
+    <p class="hero-desc">Your answers configure the AI that handles every client inquiry, email, and SMS on your behalf. The more specific you are, the better the system performs from day one — it learns your voice, your prices, your rules, and your standards directly from this form.</p>
+    <div class="time-estimate">Estimated time: 15–20 minutes</div>
     <div class="progress-wrap">
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-text" id="progressLabel">0 / 8</div>
+      <div class="progress-text" id="progressLabel">0 / 16</div>
     </div>
   </div>
 </div>
 
 <main>
-  <!-- REPLACE mrerawda below after Step 3 of the setup guide -->
   <form id="mainForm" action="https://formspree.io/f/mrerawda" method="POST">
     <div class="error-banner" id="errorBanner">Something went wrong. Please try again or contact your project manager.</div>
 
-    <!-- 01 -->
+    <!-- 01 BUSINESS IDENTITY -->
     <div class="form-section">
       <div class="section-head"><div class="section-num">01</div><div><div class="section-title">Business Identity</div><div class="section-desc">How the AI introduces itself and signs off in every communication.</div></div></div>
       <div class="field-row">
@@ -257,11 +266,14 @@
       <div class="field"><label>Full Shop Address <span class="req">*</span><span class="hint">Goes into every confirmation and calendar event</span></label><input type="text" name="bizAddress" placeholder="Your full shop address" required></div>
     </div>
 
-    <!-- 02 -->
+    <!-- 02 SERVICES & PRICING -->
     <div class="form-section">
-      <div class="section-head"><div class="section-num">02</div><div><div class="section-title">Services & Pricing</div><div class="section-desc">The AI quotes these ranges honestly when prospects ask.</div></div></div>
+      <div class="section-head priority"><div class="section-num">02</div><div><div class="section-title">Services & Pricing<span class="priority-tag">Critical</span></div><div class="section-desc">The AI quotes these ranges honestly when prospects ask. Be as accurate as possible — pricing is the #1 thing leads ask about.</div></div></div>
+
+      <div class="help-callout"><strong>Tip:</strong> Use ranges (e.g. $250–$350) so the AI can give honest answers without overpromising. Add notes for anything that affects the final price.</div>
+
       <table class="service-table">
-        <thead><tr><th style="width:34%">Service</th><th style="width:24%">Price Range</th><th style="width:18%">Install Time</th><th style="width:24%">Notes</th></tr></thead>
+        <thead><tr><th style="width:34%">Service</th><th style="width:24%">Price Range</th><th style="width:18%">Install Time</th><th style="width:24%">Notes / Variables</th></tr></thead>
         <tbody id="serviceBody">
           <tr><td><input type="text" name="service_1_name" placeholder="Remote Start (Basic)"></td><td><input type="text" name="service_1_price" placeholder="$250–$350"></td><td><input type="text" name="service_1_time" placeholder="2 hrs"></td><td><input type="text" name="service_1_notes" placeholder="1-way, standard vehicles"></td></tr>
           <tr><td><input type="text" name="service_2_name" placeholder="Remote Start (Premium)"></td><td><input type="text" name="service_2_price" placeholder="$350–$500"></td><td><input type="text" name="service_2_time" placeholder="3 hrs"></td><td><input type="text" name="service_2_notes" placeholder="2-way / app control"></td></tr>
@@ -271,33 +283,71 @@
         </tbody>
       </table>
       <button type="button" class="add-btn" id="addServiceRow">+ Add Service</button>
+
+      <div class="field" style="margin-top:1.5rem;"><label>What factors change the price? <span class="req">*</span><span class="hint">Things that bump cost up or down</span></label><textarea name="pricingFactors" placeholder='e.g. "Push-to-start vehicles add ~$100. Diesel engines may need a bypass module ($150). Older vehicles (pre-2005) may need additional parts."' required></textarea></div>
+
+      <div class="field-row">
+        <div class="field"><label>Deposit Required?</label><div class="select-wrap"><select name="depositPolicy"><option value="">Select…</option><option>No deposit required</option><option>Yes — deposit required to book</option><option>Yes — for some jobs only (specify in notes)</option></select></div></div>
+        <div class="field"><label>Deposit Amount</label><input type="text" name="depositAmount" placeholder="e.g. $100 or 25% of total"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Deposit Refundable?</label><div class="select-wrap"><select name="depositRefundable"><option value="">Select…</option><option>Yes — fully refundable with notice</option><option>Refundable with 24-48hr notice</option><option>Non-refundable</option><option>N/A</option></select></div></div>
+        <div class="field"><label>Minimum charge / diagnostic fee</label><input type="text" name="minCharge" placeholder="e.g. $75 diagnostic, no minimum, etc."></div>
+      </div>
+      <div class="field"><label>Bundles, packages, or discount offers</label><textarea name="bundles" placeholder="e.g. Remote Start + Hood Pin = $50 off. First-time customer 10% off. Refer a friend $25 credit."></textarea></div>
+      <div class="field"><label>Do you honor competitor quotes?</label><div class="select-wrap"><select name="competitorQuotes"><option value="">Select…</option><option>Yes — happy to match or beat</option><option>Sometimes — case by case</option><option>No — we price based on our quality and service</option></select></div></div>
     </div>
 
-    <!-- 03 -->
+    <!-- 03 LEAD QUALIFICATION & DISCOVERY -->
     <div class="form-section">
-      <div class="section-head"><div class="section-num">03</div><div><div class="section-title">Common Client Questions</div><div class="section-desc">The questions you get asked most. The AI uses your exact answers.</div></div></div>
+      <div class="section-head priority"><div class="section-num">03</div><div><div class="section-title">Lead Qualification & Discovery<span class="priority-tag">Critical</span></div><div class="section-desc">Teaches the AI what makes a good lead vs. a bad one and what to ask first.</div></div></div>
+
+      <div class="field"><label>The single best question to ask EVERY new lead <span class="req">*</span><span class="hint">The AI will lead with this in its first response</span></label><input type="text" name="bestQuestion" placeholder='e.g. "What\'s the year, make, and model of the vehicle?"' required></div>
+
+      <div class="field"><label>What information do you NEED before giving a real quote? <span class="req">*</span></label><textarea name="quoteRequirements" placeholder='e.g. Year/make/model, transmission type (auto/manual), key type (regular key, key fob, push-to-start), any aftermarket electronics already installed, what specifically they want to add.' required></textarea></div>
+
+      <div class="field"><label>Top 3–5 customer misconceptions you wish you could correct <span class="req">*</span><span class="hint">Helps the AI educate while it qualifies</span></label><textarea name="misconceptions" placeholder='e.g. "All remote starters are the same — they\'re not." | "I can do it myself for $50 — modern vehicles need bypass modules and proper integration." | "It only takes 30 minutes — proper installs take 2–3 hours."' required></textarea></div>
+
+      <div class="field"><label>What makes you turn down a job even if it's technically possible?</label><textarea name="turnDownReasons" placeholder="e.g. Customer wants installer to use their own parts from Amazon. Vehicle has obvious pre-existing electrical damage. Owner wants impossibly fast turnaround."></textarea></div>
+
+      <div class="field"><label>Best signals that a lead is ready to buy</label><textarea name="readyToBuy" placeholder='e.g. "Asks about timing." "Mentions a deadline like before winter." "Has the vehicle ready and asks for a quote."'></textarea></div>
+    </div>
+
+    <!-- 04 COMMON CLIENT QUESTIONS -->
+    <div class="form-section">
+      <div class="section-head priority"><div class="section-num">04</div><div><div class="section-title">Common Client Questions (FAQs)<span class="priority-tag">Critical</span></div><div class="section-desc">The questions you get asked most. The AI uses your exact answers verbatim.</div></div></div>
+
+      <div class="help-callout"><strong>Aim for 5–10 entries.</strong> The more real Q&As you provide, the more accurately the AI represents your business.</div>
+
       <div id="faqList">
         <div class="faq-item">
           <button type="button" class="remove-btn" onclick="removeFaq(this)">×</button>
           <span class="faq-label">Question</span>
           <input type="text" name="faq_1_q" placeholder="e.g. Do you work on diesel trucks?">
           <span class="faq-label" style="margin-top:0.5rem;">Your Answer</span>
-          <textarea name="faq_1_a" placeholder="e.g. Yes, we work on most diesel trucks."></textarea>
+          <textarea name="faq_1_a" placeholder="e.g. Yes, we work on most diesel trucks. Some modules may require additional parts — we'll confirm before booking."></textarea>
         </div>
         <div class="faq-item">
           <button type="button" class="remove-btn" onclick="removeFaq(this)">×</button>
           <span class="faq-label">Question</span>
           <input type="text" name="faq_2_q" placeholder="e.g. How long does a remote start install take?">
           <span class="faq-label" style="margin-top:0.5rem;">Your Answer</span>
-          <textarea name="faq_2_a" placeholder="e.g. Most remote starts take 2–3 hours."></textarea>
+          <textarea name="faq_2_a" placeholder="e.g. Most remote starts take 2–3 hours. We'll confirm based on your vehicle when you book."></textarea>
+        </div>
+        <div class="faq-item">
+          <button type="button" class="remove-btn" onclick="removeFaq(this)">×</button>
+          <span class="faq-label">Question</span>
+          <input type="text" name="faq_3_q" placeholder="e.g. Will this affect my factory warranty?">
+          <span class="faq-label" style="margin-top:0.5rem;">Your Answer</span>
+          <textarea name="faq_3_a" placeholder="Your honest answer here…"></textarea>
         </div>
       </div>
       <button type="button" class="add-btn" id="addFaq">+ Add Question</button>
     </div>
 
-    <!-- 04 -->
+    <!-- 05 JOBS & VEHICLES YOU DECLINE -->
     <div class="form-section">
-      <div class="section-head"><div class="section-num">04</div><div><div class="section-title">Jobs & Vehicles You Decline</div><div class="section-desc">Critical — the AI needs to know when and how to politely say no.</div></div></div>
+      <div class="section-head"><div class="section-num">05</div><div><div class="section-title">Jobs & Vehicles You Decline</div><div class="section-desc">Critical — the AI needs to know when and how to politely say no.</div></div></div>
       <div class="field">
         <label>Vehicle types you won't work on</label>
         <div class="check-grid">
@@ -318,17 +368,19 @@
           <label class="check-item"><input type="checkbox" name="decline_jobs" value="Custom Fabrication"> Custom Fabrication</label>
           <label class="check-item"><input type="checkbox" name="decline_jobs" value="Same-day Bookings"> Same-day Bookings</label>
           <label class="check-item"><input type="checkbox" name="decline_jobs" value="Mobile / On-site Installs"> Mobile / On-site Installs</label>
+          <label class="check-item"><input type="checkbox" name="decline_jobs" value="Customer-supplied parts"> Customer-supplied parts</label>
+          <label class="check-item"><input type="checkbox" name="decline_jobs" value="Repair of others' work"> Repair of others' work</label>
         </div>
       </div>
       <div class="field" style="margin-top:0.85rem;">
         <label>Anything else to decline or escalate</label>
-        <textarea name="declineOther" placeholder="e.g. Vehicles with pre-existing electrical issues."></textarea>
+        <textarea name="declineOther" placeholder="e.g. Vehicles with pre-existing electrical issues. Anything where the customer was told elsewhere it can't be done."></textarea>
       </div>
     </div>
 
-    <!-- 05 -->
+    <!-- 06 TONE & VOICE -->
     <div class="form-section">
-      <div class="section-head"><div class="section-num">05</div><div><div class="section-title">Tone & Voice</div><div class="section-desc">Pick the style that feels most like you.</div></div></div>
+      <div class="section-head"><div class="section-num">06</div><div><div class="section-title">Tone & Voice</div><div class="section-desc">Pick the style that feels most like you. The AI matches this in every email and SMS.</div></div></div>
       <div class="field">
         <label>Primary tone <span class="req">*</span></label>
         <div class="tone-grid">
@@ -339,15 +391,88 @@
         </div>
       </div>
       <div class="field-row" style="margin-top:1.1rem;">
-        <div class="field"><label>Phrases you always use</label><textarea name="phrasesAlways" placeholder='"no worries", "for sure"' style="min-height:82px;"></textarea></div>
-        <div class="field"><label>Phrases you'd never use</label><textarea name="phrasesNever" placeholder='"Certainly!", "Absolutely!"' style="min-height:82px;"></textarea></div>
+        <div class="field"><label>Phrases you always use</label><textarea name="phrasesAlways" placeholder='"no worries", "for sure", "let\'s get you sorted"' style="min-height:82px;"></textarea></div>
+        <div class="field"><label>Phrases you'd never use</label><textarea name="phrasesNever" placeholder='"Certainly!", "Absolutely!", "Great question!"' style="min-height:82px;"></textarea></div>
       </div>
-      <div class="field"><label>Anything else about how you communicate</label><textarea name="toneNotes" placeholder="e.g. I always use the client's first name."></textarea></div>
+      <div class="field-row">
+        <div class="field"><label>Punctuation style</label><div class="select-wrap"><select name="punctuationStyle"><option value="">Select…</option><option>Standard — proper capitals, periods</option><option>Casual — minimal punctuation, lowercase OK</option><option>Mixed — depends on the channel</option></select></div></div>
+        <div class="field"><label>Emoji use</label><div class="select-wrap"><select name="emojiUse"><option value="">Select…</option><option>Never</option><option>Rarely — only when the vibe fits</option><option>Occasionally — adds warmth</option><option>Often — part of how I talk</option></select></div></div>
+      </div>
+      <div class="field"><label>Anything else about how you communicate</label><textarea name="toneNotes" placeholder="e.g. I always use the client's first name. I never start with 'Hi' — I use 'Hey'."></textarea></div>
     </div>
 
-    <!-- 06 -->
+    <!-- 07 REAL CONVERSATION EXAMPLES -->
     <div class="form-section">
-      <div class="section-head"><div class="section-num">06</div><div><div class="section-title">Booking Preferences</div><div class="section-desc">Rules the AI follows when confirming appointments.</div></div></div>
+      <div class="section-head priority"><div class="section-num">07</div><div><div class="section-title">Real Conversation Examples<span class="priority-tag">Gold</span></div><div class="section-desc">Paste 2–3 actual recent text or email exchanges. The AI learns your real voice from these — far better than from descriptions.</div></div></div>
+
+      <div class="help-callout"><strong>This is the single most valuable section.</strong> Real examples teach the AI cadence, timing, vocabulary, and attitude in a way nothing else can. Anonymise customer names if needed.</div>
+
+      <div id="convoList">
+        <div class="convo-item">
+          <button type="button" class="remove-btn" onclick="removeConvo(this)">×</button>
+          <span class="faq-label">Conversation 1 — Successful inquiry that booked</span>
+          <input type="text" name="convo_1_context" placeholder="Brief context: e.g. 'Customer wanting remote start for 2018 F-150'">
+          <textarea name="convo_1_text" placeholder='Paste the actual exchange. Format like:&#10;&#10;Customer: Hey do you guys do remote starts on 2018 F-150s?&#10;Me: Yeah for sure. Push-to-start or regular key?&#10;Customer: Push button.&#10;Me: Looking at $400ish all in. Want me to grab you a slot?'></textarea>
+        </div>
+        <div class="convo-item">
+          <button type="button" class="remove-btn" onclick="removeConvo(this)">×</button>
+          <span class="faq-label">Conversation 2 — Where you politely declined</span>
+          <input type="text" name="convo_2_context" placeholder="Brief context: e.g. 'Customer wanted parts they bought online installed'">
+          <textarea name="convo_2_text" placeholder="Paste the actual exchange where you said no, the right way."></textarea>
+        </div>
+        <div class="convo-item">
+          <button type="button" class="remove-btn" onclick="removeConvo(this)">×</button>
+          <span class="faq-label">Conversation 3 — Where you talked someone out of buying the wrong thing</span>
+          <input type="text" name="convo_3_context" placeholder="Brief context: e.g. 'Customer wanted premium when basic would do'">
+          <textarea name="convo_3_text" placeholder="An exchange that shows your honesty in action."></textarea>
+        </div>
+      </div>
+      <button type="button" class="add-btn" id="addConvo">+ Add Conversation</button>
+    </div>
+
+    <!-- 08 RED FLAGS & TIRE-KICKERS -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">08</div><div><div class="section-title">Red Flags & Tire-Kickers</div><div class="section-desc">Helps the AI filter time-wasters and flag tough customers early.</div></div></div>
+
+      <div class="field"><label>What kind of inquiry makes you immediately not want the job?</label><textarea name="redFlags" placeholder='e.g. "Anyone who leads with \'what\'s your cheapest price.\' Anyone arguing about pricing in the first message."'></textarea></div>
+
+      <div class="field"><label>Phrases or requests that signal a problem customer</label><textarea name="problemPhrases" placeholder='e.g. "My friend said he could do it for $100." | "I just need it done quick." | "I have parts I need installed." | "I demand same-day service."'></textarea></div>
+
+      <div class="field"><label>What question do you ask to filter tire-kickers?</label><input type="text" name="filterQuestion" placeholder='e.g. "Are you ready to book this week, or just gathering info?"'></div>
+
+      <div class="field"><label>How should the AI handle obvious tire-kickers?</label><div class="select-wrap"><select name="tireKickerHandling"><option value="">Select…</option><option>Stay polite, answer once, then let the sequence run</option><option>Stay polite but stop offering booking slots</option><option>Flag for owner review immediately</option><option>Treat everyone the same — they may convert</option></select></div></div>
+    </div>
+
+    <!-- 09 WARRANTY & GUARANTEES -->
+    <div class="form-section">
+      <div class="section-head priority"><div class="section-num">09</div><div><div class="section-title">Warranty & Guarantees<span class="priority-tag">Critical</span></div><div class="section-desc">Customers ask this constantly. The AI needs your real, accurate answers.</div></div></div>
+
+      <div class="field-row">
+        <div class="field"><label>Installation labour warranty <span class="req">*</span></label><div class="select-wrap"><select name="laborWarranty" required><option value="">Select…</option><option>Lifetime labour warranty</option><option>2-year labour warranty</option><option>1-year labour warranty</option><option>90-day labour warranty</option><option>None / case by case</option></select></div></div>
+        <div class="field"><label>Parts warranty</label><div class="select-wrap"><select name="partsWarranty"><option value="">Select…</option><option>Manufacturer warranty only</option><option>Manufacturer + 1 year DDT-backed</option><option>Lifetime on select products</option><option>Varies by product</option></select></div></div>
+      </div>
+
+      <div class="field"><label>What's covered if something goes wrong after install? <span class="req">*</span></label><textarea name="postInstallSupport" placeholder='e.g. "Free re-visit within warranty period. Customer brings vehicle back, we diagnose and repair at no cost if it\'s our work or covered parts."' required></textarea></div>
+
+      <div class="field"><label>Do you service equipment installed by other shops?</label><div class="select-wrap"><select name="serviceOthersWork"><option value="">Select…</option><option>Yes — we'll work on anything</option><option>Yes — but at higher diagnostic rates</option><option>Only if we can guarantee the work</option><option>No — we only service what we install</option></select></div></div>
+
+      <div class="field"><label>Anything else about warranties or guarantees</label><textarea name="warrantyNotes" placeholder="Any specific exclusions, fine print, or guarantees worth highlighting."></textarea></div>
+    </div>
+
+    <!-- 10 UPSELLS & ADD-ONS -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">10</div><div><div class="section-title">Upsells & Add-Ons</div><div class="section-desc">Common bundles and recommendations the AI can offer when appropriate.</div></div></div>
+
+      <div class="field"><label>What do you commonly recommend alongside the primary service?</label><textarea name="commonUpsells" placeholder='e.g. "Remote start customers should add a hood pin sensor (~$50) for safety. Audio installs often pair with sound deadening (~$200)."'></textarea></div>
+
+      <div class="field"><label>$50–$200 add-ons that customers often say yes to</label><textarea name="popularAddons" placeholder="e.g. Hood pin, glass break sensor, USB charging upgrade, dash cam install."></textarea></div>
+
+      <div class="field"><label>When should the AI NOT upsell?</label><textarea name="noUpsellRules" placeholder='e.g. "Never upsell on first message — always answer first. Never push extras on customers who are clearly budget-conscious."'></textarea></div>
+    </div>
+
+    <!-- 11 BOOKING PREFERENCES -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">11</div><div><div class="section-title">Booking Preferences</div><div class="section-desc">Rules the AI follows when confirming appointments.</div></div></div>
       <div class="field">
         <label>Drop-off policy <span class="req">*</span></label>
         <div class="select-wrap"><select name="dropoffPolicy" required><option value="">Select…</option><option>Drop-off only — clients leave the vehicle with us</option><option>Waiting available for installs under 1 hour only</option><option>Either — client can wait or drop off</option></select></div>
@@ -367,12 +492,16 @@
         <div class="field"><label>Minimum notice to book <span class="req">*</span></label><div class="select-wrap"><select name="minNotice" required><option value="">Select…</option><option>Same day OK</option><option>24 hours minimum</option><option>48 hours minimum</option><option>72 hours minimum</option></select></div></div>
         <div class="field"><label>How far out do you schedule?</label><div class="select-wrap"><select name="scheduleWindow"><option value="">Select…</option><option>1 week rolling</option><option>2 weeks rolling</option><option>1 month rolling</option><option>I'll manage manually</option></select></div></div>
       </div>
-      <div class="field"><label>Anything clients must know before booking</label><textarea name="bookingNotes" placeholder="e.g. All installs are drop-off only."></textarea></div>
+      <div class="field-row">
+        <div class="field"><label>Typical wait time for a booking</label><div class="select-wrap"><select name="typicalWait"><option value="">Select…</option><option>Same week most of the time</option><option>3–5 days out</option><option>1 week out</option><option>2+ weeks out — usually busy</option></select></div></div>
+        <div class="field"><label>Do you offer rush / priority booking?</label><div class="select-wrap"><select name="rushBooking"><option value="">Select…</option><option>No — first come, first served</option><option>Yes — for an additional fee</option><option>Case by case basis</option></select></div></div>
+      </div>
+      <div class="field"><label>Anything clients must know before booking</label><textarea name="bookingNotes" placeholder="e.g. All installs are drop-off only. Arrive 10 mins early."></textarea></div>
     </div>
 
-    <!-- 07 -->
+    <!-- 12 SCHEDULE & CAPACITY -->
     <div class="form-section">
-      <div class="section-head"><div class="section-num">07</div><div><div class="section-title">Schedule & Capacity</div><div class="section-desc">Pre-filled with your confirmed hours. Adjust anything that differs.</div></div></div>
+      <div class="section-head"><div class="section-num">12</div><div><div class="section-title">Schedule & Capacity</div><div class="section-desc">Pre-filled with your confirmed hours. Adjust anything that differs.</div></div></div>
       <div class="field">
         <label>Operating days <span class="req">*</span></label>
         <div class="avail-grid">
@@ -389,25 +518,86 @@
         <div class="field"><label>Max jobs per day</label><input type="text" name="maxJobs" value="15" placeholder="15"></div>
         <div class="field"><label>Buffer between jobs (mins)</label><input type="text" name="bufferMins" value="15" placeholder="15"></div>
       </div>
-      <div class="field"><label>Known upcoming closures</label><textarea name="closures" placeholder="e.g. Dec 23–Jan 2 (holiday)." style="min-height:80px;"></textarea></div>
+      <div class="field-row">
+        <div class="field"><label>How early should clients arrive?</label><input type="text" name="arriveEarly" placeholder="e.g. 10 minutes before appointment"></div>
+        <div class="field"><label>Time-of-day busyness pattern</label><input type="text" name="busyPattern" placeholder="e.g. Mornings book fastest, afternoons more open"></div>
+      </div>
+      <div class="field"><label>Known upcoming closures</label><textarea name="closures" placeholder="e.g. Dec 23–Jan 2 (holiday). Aug 12–18 (summer break)." style="min-height:80px;"></textarea></div>
     </div>
 
-    <!-- 08 -->
+    <!-- 13 VEHICLE EXPERTISE -->
     <div class="form-section">
-      <div class="section-head"><div class="section-num">08</div><div><div class="section-title">Technical Setup</div><div class="section-desc">Account and credential status needed before development begins.</div></div></div>
+      <div class="section-head"><div class="section-num">13</div><div><div class="section-title">Vehicle Expertise & Specialties</div><div class="section-desc">Helps the AI position correctly and pre-warn on tricky vehicles.</div></div></div>
+
+      <div class="field"><label>Vehicles or brands you specialize in</label><textarea name="specialties" placeholder='e.g. "We do a ton of Ford F-150s and Ram 1500s. Strong with Toyota and Honda. Specialty in newer push-to-start systems."'></textarea></div>
+
+      <div class="field"><label>Vehicles that are notoriously hard or expensive to work on</label><textarea name="hardVehicles" placeholder='e.g. "European luxury (BMW, Audi) often needs proprietary modules. Some Chrysler products require additional bypass."'></textarea></div>
+
+      <div class="field"><label>New capabilities or services you've recently added</label><textarea name="newCapabilities" placeholder="Anything worth highlighting on first contact."></textarea></div>
+    </div>
+
+    <!-- 14 SHOP LOCATION & CUSTOMER LOGISTICS -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">14</div><div><div class="section-title">Shop Location & Customer Logistics</div><div class="section-desc">Practical info the AI shares to help customers plan their visit.</div></div></div>
+
       <div class="field-row">
-        <div class="field"><label>Twilio Account Status</label><div class="select-wrap"><select name="twilioStatus"><option value="">Select…</option><option>Account created — number purchased</option><option>Account created — no number yet</option><option>Not set up yet</option></select></div></div>
-        <div class="field"><label>Twilio Number (if purchased)</label><input type="tel" name="twilioNumber" placeholder="+1 (780) 555-0300"></div>
+        <div class="field"><label>Parking situation</label><div class="select-wrap"><select name="parking"><option value="">Select…</option><option>On-site lot — plenty of spots</option><option>Street parking only</option><option>Limited on-site, street as backup</option><option>Gated lot — call to enter</option></select></div></div>
+        <div class="field"><label>Is the shop easy to find?</label><div class="select-wrap"><select name="easyToFind"><option value="">Select…</option><option>Yes — clear signage</option><option>Yes — but mention landmarks</option><option>A bit tricky — share specific instructions</option></select></div></div>
       </div>
+
+      <div class="field"><label>Landmarks or directions worth mentioning</label><input type="text" name="landmarks" placeholder='e.g. "Across from the Petro-Canada on Whyte Ave"'></div>
+
+      <div class="field"><label>Places nearby for waiting customers</label><textarea name="waitingSpots" placeholder='e.g. "Tim Hortons next door, Starbucks 2 blocks away, public library across the street."'></textarea></div>
+
+      <div class="field"><label>Public transit / drop-off options</label><input type="text" name="transit" placeholder="e.g. ETS bus stop on the corner, Uber drop-off zone in front"></div>
+    </div>
+
+    <!-- 15 OWNER CONTROL & ALERT PREFERENCES -->
+    <div class="form-section">
+      <div class="section-head priority"><div class="section-num">15</div><div><div class="section-title">Owner Control & Alert Preferences<span class="priority-tag">Critical</span></div><div class="section-desc">How much you want to see, when you want to be notified, and what should reach your phone.</div></div></div>
+
+      <div class="field"><label>How much do you want to see day-to-day? <span class="req">*</span></label><div class="select-wrap"><select name="visibilityLevel" required><option value="">Select…</option><option>Everything — every message in/out</option><option>Bookings + flags only — let AI handle the rest</option><option>Flags + escalations only — no normal traffic</option><option>Daily summary only</option></select></div></div>
+
       <div class="field-row">
-        <div class="field"><label>Google Workspace email for the system</label><input type="email" name="workspaceEmail" placeholder="system@yourbusiness.com"></div>
-        <div class="field"><label>Website platform</label><div class="select-wrap"><select name="websitePlatform"><option value="">Select…</option><option>WordPress</option><option>Squarespace</option><option>Wix</option><option>Webflow</option><option>Custom / HTML</option><option>Other</option></select></div></div>
+        <div class="field"><label>Preferred alert channel</label><div class="select-wrap"><select name="alertChannel"><option value="">Select…</option><option>SMS only — fastest</option><option>Email only — less intrusive</option><option>Both for important things</option></select></div></div>
+        <div class="field"><label>Quiet hours — no alerts during</label><input type="text" name="quietHours" placeholder="e.g. 9pm – 7am, all day Sunday"></div>
       </div>
-      <div class="field"><label>Anything else we should know before building</label><textarea name="additionalNotes" placeholder="Existing systems, integrations, preferences, or constraints."></textarea></div>
+
+      <div class="field"><label>What should ALWAYS reach your phone immediately?</label><textarea name="alwaysAlert" placeholder='e.g. "Anything with the word lawyer, fire, or damage. Any new booking. Any prospect asking for me by name."'></textarea></div>
+
+      <div class="field"><label>How fast should the AI respond to new inquiries?</label><div class="select-wrap"><select name="responseSpeed"><option value="">Select…</option><option>Instant — within seconds</option><option>Within 5 minutes — feels human</option><option>Within 15 minutes — natural pace</option><option>Within an hour during business hours</option></select></div></div>
+
+      <div class="field"><label>How often is too often to follow up on a non-responder?</label><div class="select-wrap"><select name="followUpCadence"><option value="">Select…</option><option>Stick to the 6-email + 3-SMS sequence as designed</option><option>Less frequent — feels less pushy</option><option>More frequent — don't let leads cool</option></select></div></div>
+    </div>
+
+    <!-- 16 EDGE CASES & POLICIES -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">16</div><div><div class="section-title">Edge Cases & Policies</div><div class="section-desc">The "what if" rules that prevent confusion when things don't go to plan.</div></div></div>
+
+      <div class="field-row">
+        <div class="field"><label>No-show policy</label><div class="select-wrap"><select name="noShowPolicy"><option value="">Select…</option><option>Forfeit deposit if applicable</option><option>One free pass, then a fee</option><option>Charged a no-show fee always</option><option>Just rebook, no penalty</option></select></div></div>
+        <div class="field"><label>If a customer is 30+ minutes late</label><div class="select-wrap"><select name="latePolicy"><option value="">Select…</option><option>Reschedule — slot was held only for them</option><option>Squeeze in if possible, may run over</option><option>Take them but charge a late fee</option><option>Case by case</option></select></div></div>
+      </div>
+
+      <div class="field-row">
+        <div class="field"><label>Cancellation notice required</label><div class="select-wrap"><select name="cancellationNotice"><option value="">Select…</option><option>24 hours minimum</option><option>48 hours minimum</option><option>Anytime, no notice required</option><option>By end of previous business day</option></select></div></div>
+        <div class="field"><label>Cancellation fee</label><input type="text" name="cancellationFee" placeholder="e.g. None, $50, deposit forfeit"></div>
+      </div>
+
+      <div class="field"><label>What if customer changes their mind mid-install?</label><textarea name="midInstallChange" placeholder='e.g. "Charge for time spent + parts opened. We try to be reasonable but can\'t fully refund work in progress."'></textarea></div>
+
+      <div class="field"><label>Refund policy</label><textarea name="refundPolicy" placeholder='e.g. "Labour is non-refundable once started. Parts may be refundable if unopened. Defective products covered under warranty."'></textarea></div>
+    </div>
+
+    <!-- BLACKBOXMEDIA NOTES -->
+    <div class="form-section">
+      <div class="section-head"><div class="section-num">+</div><div><div class="section-title">Anything Else for BlackBoxMedia</div><div class="section-desc">Final thoughts, concerns, integrations, or things we haven't asked about.</div></div></div>
+
+      <div class="field"><label>Anything else we should know before building</label><textarea name="additionalNotes" placeholder="Existing systems, integrations, preferences, concerns, or unique requirements." style="min-height:130px;"></textarea></div>
     </div>
 
     <div class="submit-section">
-      <p class="submit-note">Your responses configure the AI directly. <strong>There are no wrong answers</strong> — the more specific you are, the better the system performs from day one.</p>
+      <p class="submit-note">Your responses configure the AI directly. <strong>There are no wrong answers</strong> — the more specific you are, the better the system performs from day one. We'll review your answers and confirm everything before development begins.</p>
       <button type="submit" class="submit-btn" id="submitBtn">Submit Questionnaire <span class="btn-arrow">→</span></button>
     </div>
   </form>
@@ -415,7 +605,7 @@
   <div class="success-screen" id="successScreen">
     <div class="success-ring">✓</div>
     <h2>Received — Thank You</h2>
-    <p>We'll review your answers and reach out within one business day to confirm everything and walk through next steps.</p>
+    <p>We'll review your answers carefully and reach out within one business day to confirm the details and walk through what happens next.</p>
   </div>
 </main>
 
@@ -445,7 +635,9 @@
   });
   updateProgress();
 
-  var faqCount = 3;
+  var faqCount = 4;
+  var convoCount = 4;
+
   document.getElementById('addServiceRow').addEventListener('click', function() {
     var count = document.querySelectorAll('#serviceBody tr').length + 1;
     var tr = document.createElement('tr');
@@ -469,13 +661,32 @@
     });
   });
 
+  document.getElementById('addConvo').addEventListener('click', function() {
+    var div = document.createElement('div');
+    div.className = 'convo-item';
+    div.style.cssText = 'opacity:0;transform:translateY(8px);transition:opacity 0.3s,transform 0.3s';
+    div.innerHTML = '<button type="button" class="remove-btn" onclick="removeConvo(this)">×</button><span class="faq-label">Conversation '+convoCount+'</span><input type="text" name="convo_'+convoCount+'_context" placeholder="Brief context"><textarea name="convo_'+convoCount+'_text" placeholder="Paste the actual exchange."></textarea>';
+    convoCount++;
+    document.getElementById('convoList').appendChild(div);
+    div.querySelector('input').focus();
+    div.querySelectorAll('input, textarea').forEach(function(el) { el.addEventListener('input', updateProgress); });
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() { div.style.opacity = '1'; div.style.transform = 'translateY(0)'; });
+    });
+  });
+
   function removeFaq(btn) {
     var item = btn.closest('.faq-item');
     item.style.cssText = 'opacity:0;transition:opacity 0.2s';
     setTimeout(function() { item.remove(); updateProgress(); }, 200);
   }
 
-  // Handle Formspree submission with success screen
+  function removeConvo(btn) {
+    var item = btn.closest('.convo-item');
+    item.style.cssText = 'opacity:0;transition:opacity 0.2s';
+    setTimeout(function() { item.remove(); updateProgress(); }, 200);
+  }
+
   document.getElementById('mainForm').addEventListener('submit', function(e) {
     e.preventDefault();
     var btn = document.getElementById('submitBtn');
